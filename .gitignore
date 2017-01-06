@@ -2,3 +2,4 @@ RoomManager/bin
 RoomManager/obj
 packages/
 .vs/
+RoomManager/Content/node_modules
