@@ -9,19 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
-        this.jwt = localStorage.getItem('auth_token');
+var authentication_service_1 = require("./authentication/authentication.service");
+var LoggedInGuard = (function () {
+    function LoggedInGuard(user) {
+        this.user = user;
     }
-    return AppComponent;
+    LoggedInGuard.prototype.canActivate = function () {
+        return this.user.isLoggedIn();
+    };
+    return LoggedInGuard;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'room-manager-app',
-        templateUrl: './app.component.html',
-        styleUrls: ['./app.component.css']
-    }),
-    __metadata("design:paramtypes", [])
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+LoggedInGuard = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [authentication_service_1.AuthenticationService])
+], LoggedInGuard);
+exports.LoggedInGuard = LoggedInGuard;
+//# sourceMappingURL=logged-in.guard.js.map

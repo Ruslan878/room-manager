@@ -9,19 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
-        this.jwt = localStorage.getItem('auth_token');
+var router_1 = require("@angular/router");
+var RoomsComponent = (function () {
+    function RoomsComponent(router) {
+        this.router = router;
     }
-    return AppComponent;
+    RoomsComponent.prototype.ngOnInit = function () { };
+    return RoomsComponent;
 }());
-AppComponent = __decorate([
+RoomsComponent = __decorate([
     core_1.Component({
-        selector: 'room-manager-app',
-        templateUrl: './app.component.html',
-        styleUrls: ['./app.component.css']
+        selector: 'rooms',
+        templateUrl: './rooms.component.html',
+        styleUrls: ['./rooms.component.css']
     }),
-    __metadata("design:paramtypes", [])
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+    __metadata("design:paramtypes", [router_1.Router])
+], RoomsComponent);
+exports.RoomsComponent = RoomsComponent;
+//# sourceMappingURL=rooms.component.js.map

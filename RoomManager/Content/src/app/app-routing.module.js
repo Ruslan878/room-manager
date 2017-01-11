@@ -8,40 +8,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-require("./rxjs-extensions");
 var core_1 = require("@angular/core");
-var platform_browser_1 = require("@angular/platform-browser");
-var forms_1 = require("@angular/forms");
-var http_1 = require("@angular/http");
-var authentication_service_1 = require("./authentication/authentication.service");
-var logged_in_guard_1 = require("./logged-in.guard");
-var app_routing_module_1 = require("./app-routing.module");
-var app_component_1 = require("./app.component");
+var router_1 = require("@angular/router");
 var login_component_1 = require("./login/login.component");
 var rooms_component_1 = require("./rooms/rooms.component");
-var AppModule = (function () {
-    function AppModule() {
+var authentication_service_1 = require("./authentication/authentication.service");
+var logged_in_guard_1 = require("./logged-in.guard");
+var routes = [
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: 'login', component: login_component_1.LoginComponent },
+    { path: 'rooms', component: rooms_component_1.RoomsComponent, canActivate: [logged_in_guard_1.LoggedInGuard] }
+];
+var AppRoutingModule = (function () {
+    function AppRoutingModule() {
     }
-    return AppModule;
+    return AppRoutingModule;
 }());
-AppModule = __decorate([
+AppRoutingModule = __decorate([
     core_1.NgModule({
-        imports: [
-            platform_browser_1.BrowserModule,
-            forms_1.FormsModule,
-            http_1.HttpModule,
-            http_1.JsonpModule,
-            app_routing_module_1.AppRoutingModule
-        ],
-        declarations: [
-            app_component_1.AppComponent,
-            login_component_1.LoginComponent,
-            rooms_component_1.RoomsComponent
-        ],
-        bootstrap: [app_component_1.AppComponent],
+        imports: [router_1.RouterModule.forRoot(routes)],
+        exports: [router_1.RouterModule],
         providers: [authentication_service_1.AuthenticationService, logged_in_guard_1.LoggedInGuard]
     }),
     __metadata("design:paramtypes", [])
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], AppRoutingModule);
+exports.AppRoutingModule = AppRoutingModule;
+//# sourceMappingURL=app-routing.module.js.map
