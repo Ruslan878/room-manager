@@ -21,7 +21,7 @@ export class RoomsComponent implements OnInit{
   
   constructor(private roomService: RoomService){
     this.searchRoomStream
-          .debounceTime(300)
+          .debounceTime(500)
           .distinctUntilChanged()
           .switchMap((term: string) => this.roomService.search(term))
           .subscribe(
@@ -30,9 +30,12 @@ export class RoomsComponent implements OnInit{
   }
 
   getRooms(): void {
-    this.roomService.getRooms().subscribe(
-                                  rooms => this.rooms = rooms,
-                                  error => this.errorMessage = <any>error);
+    this.roomService
+      .getRooms()
+      .subscribe(
+        rooms => this.rooms = rooms,
+        error => this.errorMessage = <any>error
+      );
   }
 
   search(filter: string): void {
@@ -40,7 +43,14 @@ export class RoomsComponent implements OnInit{
   }
 
   add(name: string): void {
-
+    if(name.length){
+      this.roomService
+        .create(name)
+        .subscribe(
+          rooms => this.rooms = rooms,
+          error => this.errorMessage = <any>error
+        );
+    }
   }
 
   delete(room: Room): void {

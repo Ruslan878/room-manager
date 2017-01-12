@@ -30,6 +30,13 @@ export class RoomService {
                  .catch(this.handleError);
     }
 
+    create (name: string): Observable<Room[]> {
+      return this.http
+                 .post(this.roomUrl, JSON.stringify({Name: name}), this.options)
+                 .map(this.extractData)
+                 .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
       let body = res.json();
       return body || body.data || { };

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Web.Http;
 using RoomManager.Helpers;
 using RoomManager.Models;
-using RoomManager.Extensions;
 
 namespace RoomManager.Controllers
 {
@@ -25,13 +23,14 @@ namespace RoomManager.Controllers
         // GET api/room/searchText
         public IEnumerable<RoomModel> Get(string filter)
         {
-            var comp = StringComparison.OrdinalIgnoreCase;
-            return MockDataBase.GetRooms().Where(x => x.Name.Contains(filter, comp) || x.Description.Contains(filter, comp));
+            return MockDataBase.GetRooms(filter);
         }
 
         // POST api/room
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post(RoomModel model)
         {
+            MockDataBase.CreateRoom(model.Name);
+            return Request.CreateResponse(System.Net.HttpStatusCode.Created, MockDataBase.GetRooms());
         }
 
         // PUT api/room/5

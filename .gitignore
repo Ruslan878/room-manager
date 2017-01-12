@@ -3,3 +3,4 @@ RoomManager/obj
 packages/
 .vs/
 RoomManager/Content/node_modules
+/RoomManager/Content/.vscode

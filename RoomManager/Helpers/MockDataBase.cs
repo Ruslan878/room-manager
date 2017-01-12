@@ -1,12 +1,16 @@
-﻿using System.Web;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using RoomManager.Models;
+using RoomManager.Extensions;
 
 namespace RoomManager.Helpers
 {
     //This class emulate work with DB
     public static class MockDataBase
     {
-        private static RoomModel[] rooms = {
+        private static List<RoomModel> rooms = new List<RoomModel> {
             new RoomModel { Id = 1, Name = "Room 101", Description = "Small room"},
             new RoomModel { Id = 2, Name = "Room 203", Description = "Large room"},
             new RoomModel { Id = 3, Name = "Room 406", Description = "Meeting room"},
@@ -19,9 +23,29 @@ namespace RoomManager.Helpers
             HttpContext.Current.Application["Rooms"] = rooms;
         }
 
-        public static RoomModel[] GetRooms()
+        public static List<RoomModel> GetRooms()
         {
-            return (RoomModel[])HttpContext.Current.Application["Rooms"];
+            return (List<RoomModel>)HttpContext.Current.Application["Rooms"];
+        }
+
+        public static List<RoomModel> GetRooms(string filter)
+        {
+            var comp = StringComparison.OrdinalIgnoreCase;
+            var rooms = (List<RoomModel>) HttpContext.Current.Application["Rooms"];
+            return rooms.Where(x => x.Name.Contains(filter, comp) || x.Description.Contains(filter, comp)).ToList();
+        }
+
+        public static void CreateRoom(string name)
+        {
+            var rooms = (List<RoomModel>)HttpContext.Current.Application["Rooms"];
+            var room = new RoomModel
+            {
+                Id = rooms.Max(x => x.Id) + 1,
+                Name = name,
+                Description = String.Empty
+            };
+            rooms.Add(room);
+            HttpContext.Current.Application["Rooms"] = rooms;
         }
     }
 }
