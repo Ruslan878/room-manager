@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using RoomManager.Helpers;
 
 namespace RoomManager
 {
@@ -15,6 +16,7 @@ namespace RoomManager
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            MockDataBase.InitializeData();
         }
     }
 }

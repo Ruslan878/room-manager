@@ -14,11 +14,13 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var authentication_service_1 = require("./authentication/authentication.service");
-var logged_in_guard_1 = require("./logged-in.guard");
+var logged_in_guard_1 = require("./authentication/logged-in.guard");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var login_component_1 = require("./login/login.component");
-var rooms_component_1 = require("./rooms/rooms.component");
+var home_component_1 = require("./home/home.component");
+var room_service_1 = require("./home/rooms/room.service");
+var rooms_component_1 = require("./home/rooms/rooms.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -36,10 +38,11 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             login_component_1.LoginComponent,
+            home_component_1.HomeComponent,
             rooms_component_1.RoomsComponent
         ],
         bootstrap: [app_component_1.AppComponent],
-        providers: [authentication_service_1.AuthenticationService, logged_in_guard_1.LoggedInGuard]
+        providers: [authentication_service_1.AuthenticationService, logged_in_guard_1.LoggedInGuard, room_service_1.RoomService]
     }),
     __metadata("design:paramtypes", [])
 ], AppModule);

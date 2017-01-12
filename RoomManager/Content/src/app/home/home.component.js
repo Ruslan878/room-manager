@@ -10,20 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var RoomsComponent = (function () {
-    function RoomsComponent(router) {
+var HomeComponent = (function () {
+    function HomeComponent(router) {
         this.router = router;
     }
-    RoomsComponent.prototype.ngOnInit = function () { };
-    return RoomsComponent;
+    HomeComponent.prototype.ngOnInit = function () { };
+    return HomeComponent;
 }());
-RoomsComponent = __decorate([
+HomeComponent = __decorate([
     core_1.Component({
-        selector: 'rooms',
-        templateUrl: './rooms.component.html',
-        styleUrls: ['./rooms.component.css']
+        selector: 'home',
+        templateUrl: './home.component.html',
+        styleUrls: ['./home.component.css']
     }),
     __metadata("design:paramtypes", [router_1.Router])
-], RoomsComponent);
-exports.RoomsComponent = RoomsComponent;
-//# sourceMappingURL=rooms.component.js.map
+], HomeComponent);
+exports.HomeComponent = HomeComponent;
+//# sourceMappingURL=home.component.js.map

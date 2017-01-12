@@ -1,0 +1,19 @@
+<div class="rooms-area">
+  <h2>Rooms</h2>
+  <div class="search">
+    <input #roomName (keyup)="search(roomName.value)"/>
+    <button (click)="add(roomName.value); roomName.value=''">
+      Add
+    </button>
+  </div>
+  <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+  <ul class="rooms">
+      <li *ngFor="let room of rooms" (click)="onSelect(room)"
+          [class.selected]="room === selectedRoom">
+        <span class="badge">{{room.Id}}</span>
+        <span>{{room.Name}}</span>
+        <button class="delete"
+          (click)="delete(room); $event.stopPropagation()">x</button>
+      </li>
+  </ul>
+</div>

@@ -11,13 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var login_component_1 = require("./login/login.component");
-var rooms_component_1 = require("./rooms/rooms.component");
+var home_component_1 = require("./home/home.component");
 var authentication_service_1 = require("./authentication/authentication.service");
-var logged_in_guard_1 = require("./logged-in.guard");
+var logged_in_guard_1 = require("./authentication/logged-in.guard");
 var routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: login_component_1.LoginComponent },
-    { path: 'rooms', component: rooms_component_1.RoomsComponent, canActivate: [logged_in_guard_1.LoggedInGuard] }
+    { path: 'rooms', component: home_component_1.HomeComponent, canActivate: [logged_in_guard_1.LoggedInGuard] }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
