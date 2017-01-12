@@ -20,7 +20,7 @@ namespace RoomManager.Helpers
 
         public static  void InitializeData()
         {
-            HttpContext.Current.Application["Rooms"] = rooms;
+            HttpContext.Current.Application["Rooms"] = rooms.OrderBy(x => x.Name).ToList();
         }
 
         public static List<RoomModel> GetRooms()
@@ -30,6 +30,10 @@ namespace RoomManager.Helpers
 
         public static List<RoomModel> GetRooms(string filter)
         {
+            if (string.IsNullOrEmpty(filter))
+            {
+                return (List<RoomModel>)HttpContext.Current.Application["Rooms"];
+            }
             var comp = StringComparison.OrdinalIgnoreCase;
             var rooms = (List<RoomModel>) HttpContext.Current.Application["Rooms"];
             return rooms.Where(x => x.Name.Contains(filter, comp) || x.Description.Contains(filter, comp)).ToList();
@@ -45,7 +49,7 @@ namespace RoomManager.Helpers
                 Description = String.Empty
             };
             rooms.Add(room);
-            HttpContext.Current.Application["Rooms"] = rooms;
+            HttpContext.Current.Application["Rooms"] = rooms.OrderBy(x => x.Name).ToList();
         }
     }
 }
