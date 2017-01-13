@@ -28,6 +28,12 @@ namespace RoomManager.Helpers
             return (List<RoomModel>)HttpContext.Current.Application["Rooms"];
         }
 
+        public static RoomModel GetRoom(int id)
+        {
+            var rooms = (List<RoomModel>)HttpContext.Current.Application["Rooms"];
+            return rooms.FirstOrDefault(x => x.Id == id);
+        }
+
         public static List<RoomModel> GetRooms(string filter)
         {
             if (string.IsNullOrEmpty(filter))

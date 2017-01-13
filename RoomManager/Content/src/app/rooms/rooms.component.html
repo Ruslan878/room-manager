@@ -16,4 +16,7 @@
           (click)="delete(room); $event.stopPropagation()">x</button>
       </li>
   </ul>
+  <div *ngIf="selectedRoom">
+    <h2>{{selectedRoom.Name}}</h2>
+  </div>
 </div>

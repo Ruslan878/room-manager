@@ -9,7 +9,8 @@ import { RoomsComponent } from './rooms/rooms.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'rooms', component: RoomsComponent, canActivate: [LoggedInGuard] }
+  { path: 'rooms', component: RoomsComponent, canActivate: [LoggedInGuard] },
+  { path: 'rooms/:id', component: RoomsComponent, canActivate: [LoggedInGuard] }
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Component, OnInit }      from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
 import { Subject }          from 'rxjs/Subject';
@@ -23,7 +23,8 @@ export class RoomsComponent implements OnInit{
   
   constructor(
     private roomService: RoomService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private location: Location
   )
   {
@@ -34,6 +35,7 @@ export class RoomsComponent implements OnInit{
           .subscribe(
               rooms => this.rooms = rooms,
               error => this.errorMessage = <any>error);
+    let id = activatedRoute.snapshot.params['id'];
   }
 
   getRooms(): void {
@@ -66,12 +68,14 @@ export class RoomsComponent implements OnInit{
 
   onSelect(room: Room): void {
     this.selectedRoom = room;
+    this.router.navigate(['/rooms', this.selectedRoom.Id]);
   }
 
   ngOnInit(): void {
     this.getRooms();
 
-    this.route.params
+    this.activatedRoute.params
+        .filter(params => params['id'])
         .switchMap((params: Params) => this.roomService.getRoom(+params['id']))
         .subscribe(room => this.selectedRoom = room);
   }

@@ -15,9 +15,9 @@ namespace RoomManager.Controllers
         }
 
         // GET api/room/5
-        public string Get(int id)
+        public RoomModel Get(int id)
         {
-            return "value";
+            return MockDataBase.GetRoom(id);
         }
 
         // GET api/room/searchText
