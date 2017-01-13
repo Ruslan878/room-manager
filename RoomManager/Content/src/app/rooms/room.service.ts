@@ -20,6 +20,14 @@ export class RoomService {
                  .catch(this.handleError);
     }
 
+    getRoom(id: number): Observable<Room> {
+      const url = `${this.roomUrl}/${id}`;
+      return this.http
+                 .get(url)
+                 .map(this.extractData)
+                 .catch(this.handleError);
+    }
+
     search (term: string): Observable<Room[]> {
       let params = new URLSearchParams();
       params.set('filter', term);

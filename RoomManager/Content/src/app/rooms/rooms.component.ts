@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
+import { Component, OnInit }      from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location }               from '@angular/common';
 
 import { Subject }          from 'rxjs/Subject';
+import 'rxjs/add/operator/switchMap';
 
 import { Room }             from './room';
 import { RoomService }      from './room.service';
@@ -19,7 +21,12 @@ export class RoomsComponent implements OnInit{
 
   private searchRoomStream = new Subject<string>();
   
-  constructor(private roomService: RoomService){
+  constructor(
+    private roomService: RoomService,
+    private route: ActivatedRoute,
+    private location: Location
+  )
+  {
     this.searchRoomStream
           .debounceTime(500)
           .distinctUntilChanged()
@@ -63,5 +70,9 @@ export class RoomsComponent implements OnInit{
 
   ngOnInit(): void {
     this.getRooms();
+
+    this.route.params
+        .switchMap((params: Params) => this.roomService.getRoom(+params['id']))
+        .subscribe(room => this.selectedRoom = room);
   }
 }
