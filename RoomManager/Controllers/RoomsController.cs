@@ -60,7 +60,7 @@ namespace RoomManager.Controllers
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            MockDataBase.Delete(id);
+            MockDataBase.DeleteRoom(id);
         }
     }
 }
