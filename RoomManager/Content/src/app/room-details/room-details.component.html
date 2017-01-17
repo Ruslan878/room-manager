@@ -1,0 +1,28 @@
+<div *ngIf="room" class="room-details">
+  <div class="header-area">
+    <h3>ROOM DETAILS</h3>
+    <button class="btn btn-danger btn-delete" (click)="delete()">Delete room</button>
+  </div>
+  <div class="name-area">
+    <div class="col-md-4">
+        <label>Name: </label>
+    </div>
+    <div class="col-md-8">
+        <input type="text" [(ngModel)]="room.Name" placeholder="name" />
+    </div>
+  </div>
+  <div class="description-area">
+    <div class="col-md-4">
+        <label>Description: </label>
+    </div>
+    <div class="col-md-8">
+        <textarea [(ngModel)]="room.Description" placeholder="description">
+        </textarea>
+    </div>
+  </div>
+  <div class="btn-area">
+    <button (click)="goBack()">Go back</button>
+    <button (click)="save()">Save</button>
+    <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+  </div>
+</div>

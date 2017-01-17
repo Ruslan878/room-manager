@@ -5,12 +5,16 @@ import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './authentication/authentication.service';
 import { LoggedInGuard } from './authentication/logged-in.guard';
 import { RoomsComponent } from './rooms/rooms.component';
+import { MembersComponent } from './members/members.component';
+import { RoomDetailsComponent } from './room-details/room-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'rooms', component: RoomsComponent, canActivate: [LoggedInGuard] },
-  { path: 'rooms/:id', component: RoomsComponent, canActivate: [LoggedInGuard] }
+  { path: 'rooms', component: RoomsComponent, canActivate: [LoggedInGuard], children: [
+    { path: ':id', component: MembersComponent, canActivate: [LoggedInGuard] }
+  ] },
+  { path: 'details/:id', component: RoomDetailsComponent, canActivate: [LoggedInGuard] }
 ];
 
 @NgModule({

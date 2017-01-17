@@ -1,3 +1,6 @@
+import '../public/css/styles.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
 import { AppModule } from './app/app.module';

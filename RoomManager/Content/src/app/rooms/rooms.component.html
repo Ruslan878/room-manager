@@ -1,10 +1,15 @@
+<div class="members-area">
+    <router-outlet></router-outlet>
+</div>
 <div class="rooms-area">
   <h2>Rooms</h2>
-  <div class="search">
-    <input #roomName (keyup)="search(roomName.value)"/>
-    <button (click)="add(roomName.value); roomName.value=''">
-      Add
-    </button>
+  <div class="search input-group">
+    <input type="text" class="form-control" #roomName (keyup)="search(roomName.value)"/>
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button" (click)="add(roomName.value); roomName.value=''">
+        Add
+      </button>
+    </span>
   </div>
   <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
   <ul class="rooms">
@@ -12,8 +17,9 @@
           [class.selected]="room === selectedRoom">
         <span class="badge">{{room.Id}}</span>
         <span>{{room.Name}}</span>
-        <button class="delete"
-          (click)="delete(room); $event.stopPropagation()">x</button>
+        <button class="details" (click)="gotoDetails(room); $event.stopPropagation()" data-toggle="tooltip" data-placement="right" title="go to details">
+          <span class="glyphicon glyphicon-arrow-right"></span>
+        </button>
       </li>
   </ul>
   <div *ngIf="selectedRoom">

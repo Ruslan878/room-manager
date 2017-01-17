@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RoomService } from './rooms/room.service';
 import { RoomsComponent } from './rooms/rooms.component';
+import { MembersComponent } from './members/members.component';
+import { RoomDetailsComponent } from './room-details/room-details.component';
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import { RoomsComponent } from './rooms/rooms.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    RoomsComponent
+    RoomsComponent,
+    MembersComponent,
+    RoomDetailsComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [AuthenticationService, LoggedInGuard, RoomService]

@@ -7,7 +7,7 @@ import { Room } from './room'
 
 @Injectable()
 export class RoomService {
-    private roomUrl = '/api/room';
+    private roomUrl = '/api/rooms';
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ headers: this.headers });
 
@@ -42,6 +42,21 @@ export class RoomService {
       return this.http
                  .post(this.roomUrl, JSON.stringify({Name: name}), this.options)
                  .map(this.extractData)
+                 .catch(this.handleError);
+    }
+
+    update (room: Room): Observable<Room[]> {
+      const url = `${this.roomUrl}/${room.Id}`;
+      return this.http
+                 .put(url, room, this.options)
+                 .map(this.extractData)
+                 .catch(this.handleError);
+    }
+
+    delete (id: number): Observable<Room[]> {
+      const url = `${this.roomUrl}/${id}`;
+            return this.http
+                 .delete(url)
                  .catch(this.handleError);
     }
 

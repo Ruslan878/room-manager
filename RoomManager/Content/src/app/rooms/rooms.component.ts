@@ -35,7 +35,6 @@ export class RoomsComponent implements OnInit{
           .subscribe(
               rooms => this.rooms = rooms,
               error => this.errorMessage = <any>error);
-    let id = activatedRoute.snapshot.params['id'];
   }
 
   getRooms(): void {
@@ -62,8 +61,9 @@ export class RoomsComponent implements OnInit{
     }
   }
 
-  delete(room: Room): void {
-
+  gotoDetails(room: Room): void {
+    this.selectedRoom = room;
+    this.router.navigate(['/details', this.selectedRoom.Id]);
   }
 
   onSelect(room: Room): void {
@@ -73,10 +73,5 @@ export class RoomsComponent implements OnInit{
 
   ngOnInit(): void {
     this.getRooms();
-
-    this.activatedRoute.params
-        .filter(params => params['id'])
-        .switchMap((params: Params) => this.roomService.getRoom(+params['id']))
-        .subscribe(room => this.selectedRoom = room);
   }
 }

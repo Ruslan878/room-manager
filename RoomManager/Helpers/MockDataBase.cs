@@ -57,5 +57,28 @@ namespace RoomManager.Helpers
             rooms.Add(room);
             HttpContext.Current.Application["Rooms"] = rooms.OrderBy(x => x.Name).ToList();
         }
+
+        public static void Update(RoomModel roomModel)
+        {
+            var rooms = (List<RoomModel>)HttpContext.Current.Application["Rooms"];
+            var room = rooms.FirstOrDefault(x => x.Id == roomModel.Id);
+            if (room != null)
+            {
+                room.Name = roomModel.Name;
+                room.Description = roomModel.Description;
+            }
+            HttpContext.Current.Application["Rooms"] = rooms.OrderBy(x => x.Name).ToList();
+        }
+
+        public static void Delete(int id)
+        {
+            var rooms = (List<RoomModel>)HttpContext.Current.Application["Rooms"];
+            var room = rooms.FirstOrDefault(x => x.Id == id);
+            if (room != null)
+            {
+                rooms.Remove(room);
+                HttpContext.Current.Application["Rooms"] = rooms;
+            }
+        }
     }
 }
