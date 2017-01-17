@@ -1,4 +1,7 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, Input }      from '@angular/core';
+
+import { Member }       from './member';
+import { Room }         from '../rooms/room';
 
 @Component({
   selector: 'members',
@@ -7,10 +10,13 @@ import { Component, OnInit }      from '@angular/core';
 })
 
 export class MembersComponent implements OnInit{
-
-
+    @Input() selectedRoom: Room;
+    members: Member[];
 
     ngOnInit(): void {
-
+      debugger
+      if(!this.selectedRoom){
+        this.members = 
+      }  
     }
 }
