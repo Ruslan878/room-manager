@@ -42,7 +42,6 @@ export class MemberService {
       const url = `${this.memberUrl}/${member.Id}`;
       return this.http
                  .put(url, member, this.options)
-                 .map(this.extractData)
                  .catch(this.handleError);
     }
 

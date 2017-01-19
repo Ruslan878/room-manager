@@ -9,10 +9,12 @@
 </div>
 <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
 <ul class="members">
-    <li *ngFor="let member of members" (click)="onSelect(member)">
-    <span>{{member.Order}}.{{member.Name}}{{selectedRoom ? '' : ' (' + member.Room.Name + ')'}}</span>
-    <button class="remove" title="delete memeber" (click)="delete(member); $event.stopPropagation()">
-        <span class="glyphicon glyphicon-remove"></span>
-    </button> 
+    <li *ngFor="let member of members">
+        <span>{{member.Order}}.</span>
+        <inline-edit [text]="member.Name"(edit)="onMemberNameEdit($event, member)"></inline-edit>
+        <span>{{selectedRoom ? '' : ' (' + member.Room.Name + ')'}}</span>
+        <button class="remove" title="delete memeber" (click)="delete(member); $event.stopPropagation()">
+            <span class="glyphicon glyphicon-remove"></span>
+        </button> 
     </li>
 </ul>

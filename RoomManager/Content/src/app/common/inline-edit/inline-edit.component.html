@@ -1,0 +1,8 @@
+<span class="inline-edit">
+    <span [hidden]="!isDisplay" (click)="beginEdit(editText)">
+        {{ text }}
+    </span>
+    <span [hidden]="isDisplay">
+        <input #editText type="text" [value]="text" (blur)="editDone($event, editText.value)">
+    </span>
+</span>

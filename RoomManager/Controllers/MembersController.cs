@@ -46,7 +46,7 @@ namespace RoomManager.Controllers
             }
             MockDataBase.Update(member);
 
-            return Request.CreateResponse(HttpStatusCode.OK, MockDataBase.GetMembers());
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // DELETE api/member/5

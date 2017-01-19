@@ -15,6 +15,7 @@ import { RoomsComponent } from './rooms/rooms.component';
 import { MembersComponent } from './members/members.component';
 import { RoomDetailsComponent } from './room-details/room-details.component';
 import { MemberService } from './members/member.service';
+import { InlineEditComponent } from './common/inline-edit/inline-edit.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { MemberService } from './members/member.service';
     LoginComponent,
     RoomsComponent,
     MembersComponent,
-    RoomDetailsComponent
+    RoomDetailsComponent,
+    InlineEditComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [AuthenticationService, LoggedInGuard, RoomService, MemberService]

@@ -4,6 +4,7 @@ import { ActivatedRoute }         from '@angular/router';
 import { Member }         from './member';
 import { Room }           from '../rooms/room';
 import { MemberService }  from './member.service';
+import { InlineEditComponent } from '../common/inline-edit/inline-edit.component';
 
 @Component({
   selector: 'members',
@@ -66,6 +67,18 @@ export class MembersComponent implements OnInit{
           },
           error => this.errorMessage = <any>error
         );
+    }
+
+    onMemberNameEdit(newName: string, member: Member): void {
+      if(newName != member.Name){
+        member.Name = newName;
+        this.memberService
+          .update(member)
+          .subscribe(
+            () => {},
+            error => this.errorMessage = <any>error
+          );
+      }
     }
 
     ngOnInit(): void {
