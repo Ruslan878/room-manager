@@ -1,4 +1,4 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, EventEmitter }      from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
@@ -68,10 +68,27 @@ export class RoomsComponent implements OnInit{
 
   onSelect(room: Room): void {
     this.selectedRoom = room;
-    this.router.navigate(['/rooms', this.selectedRoom.Id]);
+    this.location.replaceState("/rooms/"+room.Id);
+  }
+
+  onRemovedMember(): void{
+   this.getRooms();
+  }
+
+  onCreatedMember(): void {
+    this.getRooms();
   }
 
   ngOnInit(): void {
     this.getRooms();
+    let id = +this.activatedRoute.snapshot.params['id'];
+    if(id){
+      this.roomService
+      .getRoom(id)
+      .subscribe(
+        room => this.selectedRoom = room,
+        error => this.errorMessage = <any>error
+      );
+    }
   }
 }

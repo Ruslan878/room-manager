@@ -21,7 +21,7 @@ namespace RoomManager.Controllers
             return MockDataBase.GetRoom(id);
         }
 
-        // GET api/room/searchText
+        // GET api/room/filter
         public IEnumerable<RoomModel> Get(string filter)
         {
             return MockDataBase.GetRooms(filter);

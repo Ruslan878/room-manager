@@ -1,10 +1,12 @@
 <div class="members-area">
-    <router-outlet></router-outlet>
+  <div>
+    <members [(selectedRoom)]="selectedRoom" (onRemoved)="onRemovedMember()" (onCreated)="onCreatedMember()"></members>
+  </div>
 </div>
 <div class="rooms-area">
   <h2>Rooms</h2>
   <div class="search input-group">
-    <input type="text" class="form-control" #roomName (keyup)="search(roomName.value)"/>
+    <input type="text" class="form-control" #roomName (keyup)="search(roomName.value)" (keyup.enter)="add(roomName.value); roomName.value=''"/>
     <span class="input-group-btn">
       <button class="btn btn-default" type="button" (click)="add(roomName.value); roomName.value=''">
         Add
@@ -14,15 +16,15 @@
   <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
   <ul class="rooms">
       <li *ngFor="let room of rooms" (click)="onSelect(room)"
-          [class.selected]="room === selectedRoom">
+          [class.selected]="room === selectedRoom || (room && selectedRoom && room.Id == selectedRoom.Id)">
         <span class="badge">{{room.Id}}</span>
         <span>{{room.Name}}</span>
-        <button class="details" (click)="gotoDetails(room); $event.stopPropagation()" data-toggle="tooltip" data-placement="right" title="go to details">
-          <span class="glyphicon glyphicon-arrow-right"></span>
-        </button>
+        <div class="right-area">
+          <span class="members-count">{{room.MembersCount}}</span>
+          <button class="details" (click)="gotoDetails(room); $event.stopPropagation()" data-toggle="tooltip" data-placement="right" title="go to details">
+            <span class="glyphicon glyphicon-arrow-right"></span>
+          </button>          
+        </div>
       </li>
   </ul>
-  <div *ngIf="selectedRoom">
-    <h2>{{selectedRoom.Name}}</h2>
-  </div>
 </div>

@@ -11,9 +11,8 @@ import { RoomDetailsComponent } from './room-details/room-details.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'rooms', component: RoomsComponent, canActivate: [LoggedInGuard], children: [
-    { path: ':id', component: MembersComponent, canActivate: [LoggedInGuard] }
-  ] },
+  { path: 'rooms/:id', component: RoomsComponent, canActivate: [LoggedInGuard] },
+  { path: 'rooms', component: RoomsComponent, canActivate: [LoggedInGuard] },
   { path: 'details/:id', component: RoomDetailsComponent, canActivate: [LoggedInGuard] }
 ];
 

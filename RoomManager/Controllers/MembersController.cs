@@ -18,16 +18,18 @@ namespace RoomManager.Controllers
         }
 
         // GET api/member/5
-        public MemberModel Get(int id)
+        public IEnumerable<MemberModel> Get(int roomId)
         {
-            return MockDataBase.GetMember(id);
+            return MockDataBase.GetMembers(roomId);
         }
 
         // POST api/member
-        public HttpResponseMessage Post(MemberModel model)
+        public HttpResponseMessage Post([FromBody]NewMemberModel member)
         {
-            MockDataBase.CreateRoom(model.Name);
-            return Request.CreateResponse(HttpStatusCode.Created, MockDataBase.GetMembers());
+            var result = MockDataBase.CreateMember(member.Name, member.RoomId) 
+                ? Request.CreateResponse(HttpStatusCode.Created)
+                : Request.CreateResponse(HttpStatusCode.NotFound);
+            return result;
         }
 
         // PUT api/member

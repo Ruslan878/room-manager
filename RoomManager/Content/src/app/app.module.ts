@@ -14,6 +14,7 @@ import { RoomService } from './rooms/room.service';
 import { RoomsComponent } from './rooms/rooms.component';
 import { MembersComponent } from './members/members.component';
 import { RoomDetailsComponent } from './room-details/room-details.component';
+import { MemberService } from './members/member.service';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { RoomDetailsComponent } from './room-details/room-details.component';
     RoomDetailsComponent
   ],
   bootstrap: [ AppComponent ],
-  providers: [AuthenticationService, LoggedInGuard, RoomService]
+  providers: [AuthenticationService, LoggedInGuard, RoomService, MemberService]
 })
 
 export class AppModule { }

@@ -7,7 +7,7 @@
 .members-area{
     float: left;
     height: 100%;
-    width: 800px;
+    width: 700px;
 }
 
 .search {
@@ -18,12 +18,14 @@
   background-color: #CFD8DC !important;
   color: white;
 }
+
 .rooms {
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
 }
-.rooms li {
+
+li {
   cursor: pointer;
   vertical-align: middle;
   position: relative;
@@ -32,20 +34,24 @@
   margin: .5em;
   border-radius: 4px;
 }
-.rooms li:hover {
+
+li:hover {
   color: #607D8B;
   background-color: #DDD;
   left: .1em;
 }
-.rooms li.selected:hover {
+
+li.selected:hover {
   background-color: #BBD8DC !important;
   color: white;
 }
-.rooms .text {
+
+.text {
   position: relative;
   top: -3px;
 }
-.rooms .badge {
+
+.badge {
   display: inline-block;
   color: white;
   background-color: #607D8B;
@@ -56,13 +62,25 @@
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
-.rooms span {
+
+span {
   font-size: medium;
 }
 
-button.details {
-  float:right;
+.right-area{
+  float: right;
+}
+
+.details {
   margin-right: .8em;
   background-color: gray !important;
   color:white;
+}
+
+.members-count {
+  display: inline-block;
+  background-color: #607D8B;
+  color: white;
+  margin-right: 20px;
+  padding: 0 5px;
 }

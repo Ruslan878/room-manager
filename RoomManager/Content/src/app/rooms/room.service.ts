@@ -53,7 +53,7 @@ export class RoomService {
                  .catch(this.handleError);
     }
 
-    delete (id: number): Observable<Room[]> {
+    delete (id: number): Observable<Response> {
       const url = `${this.roomUrl}/${id}`;
             return this.http
                  .delete(url)

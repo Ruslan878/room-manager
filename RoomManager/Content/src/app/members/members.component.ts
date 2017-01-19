@@ -1,22 +1,74 @@
-import { Component, OnInit, Input }      from '@angular/core';
+import { Component, EventEmitter, OnInit, OnChanges, SimpleChanges }      from '@angular/core';
+import { ActivatedRoute }         from '@angular/router';
 
-import { Member }       from './member';
-import { Room }         from '../rooms/room';
+import { Member }         from './member';
+import { Room }           from '../rooms/room';
+import { MemberService }  from './member.service';
 
 @Component({
   selector: 'members',
   templateUrl: './members.component.html',
-  styleUrls: [ './members.component.css' ]
+  styleUrls: [ './members.component.css' ],
+  inputs: ['selectedRoom'],
+  outputs: ['onRemoved', 'onCreated']
 })
 
 export class MembersComponent implements OnInit{
-    @Input() selectedRoom: Room;
+    selectedRoom: Room;
     members: Member[];
+    errorMessage: string;
+    onRemoved = new EventEmitter();
+    onCreated = new EventEmitter();
+
+    constructor(
+      private memberService: MemberService,
+      private activatedRoute: ActivatedRoute,
+    ) {}
+
+    ngOnChanges(changes: SimpleChanges): void {
+      let newRoom = changes['selectedRoom'].currentValue;
+      if(newRoom){
+        this.getMembers();
+      }
+    }
+
+    getMembers(): void {
+      var roomId = this.selectedRoom ? this.selectedRoom.Id : undefined;
+      this.memberService
+        .getMembers(roomId)
+        .subscribe(
+          members => this.members = members,
+          error => this.errorMessage = <any>error
+        );
+    }    
+
+    add(name: string): void {
+      if(name.length){
+        this.memberService
+          .create(name, this.selectedRoom.Id)
+          .subscribe(
+            () => {
+              this.onCreated.emit();
+              this.getMembers();
+            },
+            error => this.errorMessage = <any>error
+          );
+      }
+    }
+
+    delete(member: Member): void {
+      this.memberService
+        .delete(member.Id)
+        .subscribe(
+          () => {
+            this.onRemoved.emit();
+            this.getMembers();
+          },
+          error => this.errorMessage = <any>error
+        );
+    }
 
     ngOnInit(): void {
-      debugger
-      if(!this.selectedRoom){
-        this.members = 
-      }  
+      this.getMembers();
     }
 }

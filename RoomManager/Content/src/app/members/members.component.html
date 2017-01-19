@@ -1,1 +1,18 @@
-<h2>Members</h2>
+<h2>{{ selectedRoom ? selectedRoom.Name : 'No room selected'}}</h2>
+<div *ngIf="selectedRoom" class="input-group">
+    <input type="text" class="form-control" #memberName (keyup.enter)="add(memberName.value); memberName.value=''"/>
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="add(memberName.value); memberName.value=''">
+        Add
+        </button>
+    </span>
+</div>
+<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+<ul class="members">
+    <li *ngFor="let member of members" (click)="onSelect(member)">
+    <span>{{member.Order}}.{{member.Name}}{{selectedRoom ? '' : ' (' + member.Room.Name + ')'}}</span>
+    <button class="remove" title="delete memeber" (click)="delete(member); $event.stopPropagation()">
+        <span class="glyphicon glyphicon-remove"></span>
+    </button> 
+    </li>
+</ul>
